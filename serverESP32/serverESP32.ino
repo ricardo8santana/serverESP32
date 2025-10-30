@@ -1,3 +1,4 @@
+
 #include <WiFi.h>
 #include <WebServer.h>
 
@@ -5,17 +6,22 @@
 const char* ssid = "IoT01-senac-Ricardo";
 const char* password = "123456789";
 
+//Definir o pino LED
+const int ledPin = 14;
+
+
+
 //Criar um servidor web na porta 80
 WebServer server(80);
 
 //Página HTML que vai ser exibida nesse servidor 
-String HTMLPage = R"rawliteral(
+String htmlPage = R"rawliteral(
   <!DOCTYPE html>
   <html>
-  <body>
   <h1>Turma de IoT - Senac L13</h1>
-  <p>Você está conecrtado ao servidor de <strong>Luis Ricardo</strong></p>
-  </body>
+  <p>Você está conectado ao servidor de <strong>Luis Ricardo</strong></p>
+  <button onclick="location.href='/liga'">Ligar✅</button>
+  <button onclick="location.href='/desliga'">Desligar⛔</button>
   </html>
 )rawliteral";
 
@@ -23,6 +29,20 @@ void handleRoot(){
   server.send(200, "text/html", htmlPage);
 
 }
+
+//FUNÇÂO PARA ligar o led
+void handleLedOn(){
+  digitalWrite(ledPin, HIGH);   
+  server.send(200, "text/html", htmlPage);
+  }
+
+//FUNÇÂO PARA DESLIGAR  o led
+void handleLedOff(){
+  digitalWrite(ledPin, LOW);
+  server.send(200, "text/html", htmlPage);
+}
+
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -37,11 +57,18 @@ void setup() {
   Serial.println(WiFi.softAPIP());
 
   //Definir a rota em que a nossa página vai ser exibida(/)
-  server.on("/", handeleRoot);
+  server.on("/", handleRoot);
+  server.on("/liga", handleLedOn);
+  server.on("/desliga", handleLedOff);
 
   //Iniciar o Servidor
   server.begin();
   Serial.println("Servidor web iniciada!");
+
+  //Definindo porta do led output
+
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, HIGH);
 
 }
 
