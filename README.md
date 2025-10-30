@@ -19,7 +19,6 @@ WebServer.h
 
 
 Conexões
-
 LED 1 conectado ao pino GPIO 14
 LED 2 conectado ao pino GPIO 33
 
