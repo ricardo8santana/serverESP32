@@ -1,4 +1,3 @@
-
 #include <WiFi.h>
 #include <WebServer.h>
 
@@ -16,13 +15,54 @@ WebServer server(80);
 
 //Página HTML que vai ser exibida nesse servidor 
 String htmlPage = R"rawliteral(
-  <!DOCTYPE html>
-  <html>
-  <h1>Turma de IoT - Senac L13</h1>
-  <p>Você está conectado ao servidor de <strong>Luis Ricardo</strong></p>
-  <button onclick="location.href='/liga'">Ligar✅</button>
-  <button onclick="location.href='/desliga'">Desligar⛔</button>
-  </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controlando Led</title>
+    <style>
+        body{
+            margin:0;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #0f172a;
+            color: #e5e7eb;
+            text-align:center;
+        }
+        h1{
+            color: #60a5fa;
+
+        }
+        p{
+            color:#cbd5e1;
+            margin-bottom: 30px;
+        }
+        button{
+            color:#fff;
+            border: none;
+            padding:14px 24px;
+            margin:8px;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 220px;
+        }
+        .btn-liga{
+            background-color: #16a34a;
+        }
+        .btn-desliga{
+            background-color: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <h1>Turma de IoT - Senac L13</h1>
+    <p>Você está conectado ao servidor de <strong>Luis Ricardo</strong></p>
+    <button onclick="location.href='/liga'" class="btn-liga">Ligar✅</button>
+    <button onclick="location.href='/desliga'" class="btn-desliga">Desligar⛔</button>
+</body>
+</html>
 )rawliteral";
 
 void handleRoot(){
