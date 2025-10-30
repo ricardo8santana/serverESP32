@@ -52,5 +52,5 @@ Rotas:
 
  Interface Web
 A interface é simples e intuitiva, com botões verdes para ligar e vermelhos para desligar os LEDs. O layout é responsivo e otimizado para dispositivos móveis.<br>
- Créditos
+Créditos
 Projeto desenvolvido por Luis Ricardo
