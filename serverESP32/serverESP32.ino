@@ -1,3 +1,4 @@
+
 #include <WiFi.h>
 #include <WebServer.h>
 
@@ -61,12 +62,12 @@ String htmlPage = R"rawliteral(
     <h1>Turma de IoT - Senac L13</h1>
     <p>Você está conectado ao servidor de <strong>Luis Ricardo</strong></p>
     <h2>Led 1</h2>
-    <button onclick="location.href='/liga'" class="btn-liga">Ligar✅</button>
-    <button onclick="location.href='/desliga'" class="btn-desliga">Desligar⛔</button>
+    <button onclick="location.href='/liga1'" class="btn-liga">Ligar✅</button>
+    <button onclick="location.href='/desliga1'" class="btn-desliga">Desligar⛔</button>
     <div>
     <h2>Led 2</h2>
-    <button onclick="location.href='/liga'" class="btn-liga">Ligar✅</button>
-    <button onclick="location.href='/desliga'" class="btn-desliga">Desligar⛔</button>
+    <button onclick="location.href='/liga2'" class="btn-liga">Ligar✅</button>
+    <button onclick="location.href='/desliga2'" class="btn-desliga">Desligar⛔</button>
     </div>
 
 </body>
@@ -80,7 +81,7 @@ void handleRoot(){
 
 //FUNÇÂO PARA ligar o led
 void handleLedOn1(){
-  digitalWrite(ledPin, HIGH);   
+  digitalWrite(ledPin1, HIGH);   
   server.send(200, "text/html", htmlPage);
   }
 
@@ -91,13 +92,13 @@ void handleLedOn2(){
 
 //FUNÇÂO PARA DESLIGAR  o led
 void handleLedOff1(){
-  digitalWrite(ledPin, LOW);
+  digitalWrite(ledPin1, LOW);
   server.send(200, "text/html", htmlPage);
 }
 
 void handleLedOff2(){
   digitalWrite(ledPin2, LOW);
-  server.send(200, "text/html", htmlPage)
+  server.send(200, "text/html", htmlPage);
 }
 
 
@@ -126,10 +127,8 @@ void setup() {
   Serial.println("Servidor web iniciada!");
 
   //Definindo porta do led output
-
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, HIGH);
-
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
 }
 
 void loop() {
