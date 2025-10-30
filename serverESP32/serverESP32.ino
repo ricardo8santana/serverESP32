@@ -6,7 +6,8 @@ const char* ssid = "IoT01-senac-Ricardo";
 const char* password = "123456789";
 
 //Definir o pino LED
-const int ledPin = 14;
+const int ledPin1 = 14;
+const int ledPin2 = 33;
 
 
 
@@ -59,8 +60,15 @@ String htmlPage = R"rawliteral(
 <body>
     <h1>Turma de IoT - Senac L13</h1>
     <p>Você está conectado ao servidor de <strong>Luis Ricardo</strong></p>
+    <h2>Led 1</h2>
     <button onclick="location.href='/liga'" class="btn-liga">Ligar✅</button>
     <button onclick="location.href='/desliga'" class="btn-desliga">Desligar⛔</button>
+    <div>
+    <h2>Led 2</h2>
+    <button onclick="location.href='/liga'" class="btn-liga">Ligar✅</button>
+    <button onclick="location.href='/desliga'" class="btn-desliga">Desligar⛔</button>
+    </div>
+
 </body>
 </html>
 )rawliteral";
@@ -71,15 +79,25 @@ void handleRoot(){
 }
 
 //FUNÇÂO PARA ligar o led
-void handleLedOn(){
+void handleLedOn1(){
   digitalWrite(ledPin, HIGH);   
   server.send(200, "text/html", htmlPage);
   }
 
+void handleLedOn2(){
+  digitalWrite(ledPin2, HIGH);
+  server.send(200, "text/html", htmlPage);
+}
+
 //FUNÇÂO PARA DESLIGAR  o led
-void handleLedOff(){
+void handleLedOff1(){
   digitalWrite(ledPin, LOW);
   server.send(200, "text/html", htmlPage);
+}
+
+void handleLedOff2(){
+  digitalWrite(ledPin2, LOW);
+  server.send(200, "text/html", htmlPage)
 }
 
 
@@ -98,8 +116,10 @@ void setup() {
 
   //Definir a rota em que a nossa página vai ser exibida(/)
   server.on("/", handleRoot);
-  server.on("/liga", handleLedOn);
-  server.on("/desliga", handleLedOff);
+  server.on("/liga1", handleLedOn1);
+  server.on("/desliga1", handleLedOff1);
+   server.on("/liga2", handleLedOn2);
+  server.on("/desliga2", handleLedOff2);
 
   //Iniciar o Servidor
   server.begin();
